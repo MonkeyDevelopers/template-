@@ -28,13 +28,10 @@ function setDirection() {
 	return props.direction
 }
 
-// modes - modal_default, modal_compact
 function setModalMode() {
-	if (!props.mode) {
-		return 'modal_default'
-	}
-	return props.mode
+	return props.compact ? 'modal_compact' : 'modal_default'
 }
+
 
 function openModal() {
 	if (action.value) {
@@ -48,7 +45,7 @@ const props = defineProps({
 	title: { type: String, default: "", required: false },
 	options: { type: Array, default: [], required: false },
 	direction: { type: String, default: "bottom-left", required: false },
-	mode: { type: String, default: "default", required: false },
+	compact: { type: Boolean, default: false, required: false },
 });
 
 const modal_ref = ref(null);

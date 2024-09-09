@@ -1,6 +1,7 @@
 <template>
 	<div class="modal_relative">
 		<div @click="openModal()">
+			{{ compact }}
 			<slot></slot>
 		</div>
 
@@ -8,8 +9,7 @@
 			<div class="modal" :class="setDirection(), setModalMode()" v-if="action" ref="modal_ref">
 				<h2 v-if="title">{{ title }}</h2>
 				<hr v-if="title">
-				<div class="modal_item" v-for="option in options"
-					@click="option.action">
+				<div class="modal_item" v-for="option in options" @click="option.action">
 					<icon v-if="option.icon" :name="option.icon" class="modal_icon" />
 					<span>{{ option.name }}</span>
 				</div>
@@ -30,12 +30,8 @@ function setDirection() {
 	return props.direction
 }
 
-// modes - modal_default, modal_compact
 function setModalMode() {
-	if (!props.mode) {
-		return 'modal_default'
-	}
-	return props.mode
+	return props.compact ? 'modal_compact' : 'modal_default'
 }
 
 function openModal() {
@@ -50,7 +46,7 @@ const props = defineProps({
 	title: { type: String, default: "", required: false },
 	options: { type: Array, default: [], required: false },
 	direction: { type: String, default: "bottom-left", required: false },
-	mode: { type: String, default: "modal_default", required: false },
+	compact: { type: Boolean, default: false, required: false },
 });
 
 const modal_ref = ref(null);
@@ -63,7 +59,6 @@ onClickOutside(modal_ref, (event) => {
 </script>
 
 <style scoped>
-
 /* modal */
 
 .modal_relative {

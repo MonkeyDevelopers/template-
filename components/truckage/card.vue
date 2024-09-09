@@ -51,7 +51,7 @@
       <div class="card_col">
          <div class="card_row">
             <!-- <span>Ações</span> -->
-            <DropdownOptions :options="actionOptions" mode="modal_compact" />
+            <DropdownOptions :options="actionOptions" compact />
          </div>
       </div>
    </div>

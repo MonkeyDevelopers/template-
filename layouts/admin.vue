@@ -10,7 +10,7 @@
             <p>{{ description }}</p>
          </div>
 
-         <DropdownMenu :options="actionOptions" mode="modal_compact">
+         <DropdownMenu :options="actionOptions" compact>
             <icon name="ph:gear-fine" class="header_menu_icon" />
          </DropdownMenu>
       </header>
