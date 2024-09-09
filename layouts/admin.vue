@@ -10,9 +10,9 @@
             <p>{{ description }}</p>
          </div>
 
-         <icon name="ph:gear-fine" class="header_menu_icon" @click="modalActions = !modalActions" />
-
-         <DropdownMenu v-model="modalActions" title="Menu" :options="actionOptions" />
+         <DropdownMenu title="Menu" :options="actionOptions">
+            <icon name="ph:gear-fine" class="header_menu_icon" />
+         </DropdownMenu>
       </header>
 
 
@@ -121,8 +121,6 @@ const props = defineProps({
    title: '',
    description: ''
 });
-
-const modalActions = ref(false);
 
 const mobileMenuStore = useMobileMenu();
 const { mobileMenu } = storeToRefs(mobileMenuStore);

@@ -1,12 +1,15 @@
 <template>
+	<div @click="action = !action">
+		<slot></slot>
+	</div>
 	<Transition name="fade">
 		<div class="modal_header_actions" v-if="action" ref="action_ref">
 			<h2>{{ title }}</h2>
 			<hr>
-            <div class="modal_header_actions_item" v-for="option in options">
-               <icon :name="option.icon" class="modal_header_actions_item_icon" />
-               <span>{{ option.name }}</span>
-            </div>
+			<div class="modal_header_actions_item" v-for="option in options">
+				<icon :name="option.icon" class="modal_header_actions_item_icon" />
+				<span>{{ option.name }}</span>
+			</div>
 		</div>
 	</Transition>
 </template>
@@ -28,6 +31,20 @@ onClickOutside(action_ref, (event) => {
 </script>
 
 <style scoped>
+.header_menu_icon {
+	color: #dcdcdc;
+	font-size: 35px;
+	cursor: pointer;
+	transition: .3s;
+	padding: 5px;
+	border-radius: 4px;
+}
+
+.header_menu_icon:hover {
+	background: #242424;
+	color: white;
+}
+
 .modal_header_actions {
 	width: 230px;
 	background: #0E0E0E;
