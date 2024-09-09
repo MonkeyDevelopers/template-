@@ -10,7 +10,7 @@
             <p>{{ description }}</p>
          </div>
 
-         <DropdownMenu title="Menu" :options="actionOptions" direction="top-right">
+         <DropdownMenu title="Menu" :options="actionOptions">
             <icon name="ph:gear-fine" class="header_menu_icon" />
          </DropdownMenu>
       </header>

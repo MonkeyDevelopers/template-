@@ -94,7 +94,7 @@
    }
    
    .pulse {
-      background: rgb(17, 255, 156);
+      background: #ff5c11;
       border-radius: 50%;
       height: 13px;
       width: 13px;
@@ -183,7 +183,7 @@
    @keyframes pulse {
       0% {
          transform: scale(0.95);
-         box-shadow: 0 0 0 0 rgba(0, 255, 183, 0.7);
+         box-shadow: 0 0 0 0 #ff5c11b3;
       }
 
       70% {

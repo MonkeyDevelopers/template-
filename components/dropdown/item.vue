@@ -21,38 +21,38 @@
 </template>
 
 <script setup>
-const action = ref(false);
+   const action = ref(false);
 
-function setDirection() {
-	if (!props.direction) {
-		return 'bottom-left'
-	}
-	return props.direction
-}
+   function setDirection() {
+      if (!props.direction) {
+         return 'bottom-left'
+      }
+      return props.direction
+   }
 
-function openModal() {
+   function openModal() {
 
-	if (action.value) {
-		action.value = false;
-	} else {
-		action.value = true;
-	}
+      if (action.value) {
+         action.value = false;
+      } else {
+         action.value = true;
+      }
 
-}
+   }
 
 
-const props = defineProps({
-	title: { type: String, default: "", required: false },
-	options: { type: Array, default: [], required: false },
-	direction: { type: String, default: "bottom-left", required: false },
-});
+   const props = defineProps({
+      title: { type: String, default: "", required: false },
+      options: { type: Array, default: [], required: false },
+      direction: { type: String, default: "bottom-left", required: false },
+   });
 
-const modal_ref = ref(null);
-onClickOutside(modal_ref, (event) => {
-	if (action.value == true) {
-		action.value = false;
-	}
-});
+   const modal_ref = ref(null);
+   onClickOutside(modal_ref, (event) => {
+      if (action.value == true) {
+         action.value = false;
+      }
+   });
 
 </script>
 
