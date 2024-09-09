@@ -21,7 +21,7 @@
       <div class="card_col">
          <div class="card_row">
             <span>Status</span>
-            <p>Inicial</p>
+            <Badge color="#FF0000">Inicial</Badge>
          </div>
          <div class="card_row">
             <span>Prazo de Entrega</span>
