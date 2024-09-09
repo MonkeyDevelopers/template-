@@ -22,7 +22,7 @@ const { mobileMenu } = storeToRefs(mobileMenuStore);
 
 const props = defineProps({
     options: { type: Object, default: {}, required: true },
-    size: { type: String, default: 99, required: false },
+    size: { type: String, default: '99', required: false },
 });
 
 const miniOptions = computed(() => {

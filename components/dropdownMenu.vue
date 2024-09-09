@@ -1,33 +1,49 @@
 <template>
-	<div @click="action = !action">
-		<slot></slot>
-	</div>
-	<Transition name="fade">
-		<div class="modal_header_actions" v-if="action" ref="action_ref">
-			<h2>{{ title }}</h2>
-			<hr>
-			<div class="modal_header_actions_item" v-for="option in options">
-				<icon :name="option.icon" class="modal_header_actions_item_icon" />
-				<span>{{ option.name }}</span>
-			</div>
+	<div class="modal_header_absolute">
+		<div @click="openModal()">
+			<slot></slot>
 		</div>
-	</Transition>
+		
+		<Transition name="fade">
+			<div class="modal_header_actions" v-if="action" ref="modal_ref">
+				<h2>{{ title }}</h2>
+				<hr>
+				<div class="modal_header_actions_item" v-for="option in options">
+					<icon :name="option.icon" class="modal_header_actions_item_icon" />
+					<span>{{ option.name }}</span>
+				</div>
+			</div>
+		</Transition>
+			
+	</div>
+
 </template>
 
 <script setup>
-const action = defineModel({ required: false, default: false });
+	const action = ref(false);
 
-const props = defineProps({
-	title: { type: String, default: "", required: false },
-	options: { type: Array, default: [], required: false },
-});
-
-const action_ref = ref(null);
-onClickOutside(action_ref, (event) => {
-	if (action.value == true) {
-		action.value = false;
+	function openModal() {
+		
+		if(action.value) {
+			action.value = false;
+		} else {
+			action.value = true;
+		}
+		
 	}
-});
+	
+	const props = defineProps({
+		title: { type: String, default: "", required: false },
+		options: { type: Array, default: [], required: false },
+	});
+
+	const modal_ref = ref(null);
+	onClickOutside(modal_ref, (event) => {
+		if (action.value == true) {
+			action.value = false;
+		}
+	});
+	
 </script>
 
 <style scoped>
@@ -45,6 +61,10 @@ onClickOutside(action_ref, (event) => {
 	color: white;
 }
 
+.modal_header_absolute {
+	position: relative;
+}
+
 .modal_header_actions {
 	width: 230px;
 	background: #0E0E0E;
@@ -52,9 +72,9 @@ onClickOutside(action_ref, (event) => {
 	border-radius: 6px;
 	padding: 15px;
 	position: absolute;
-	top: 55px;
-	right: 20px;
-	z-index: 3;
+	top: 110%;
+	right: 0;
+	z-index: 5;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -114,4 +134,21 @@ onClickOutside(action_ref, (event) => {
 .modal_header_actions_item:hover .modal_header_actions_item_icon {
 	color: white;
 }
+
+/* transition */
+
+.fade-enter-active {
+   transition: all .2s;
+}
+
+.fade-leave-active {
+   transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+   opacity: 1;
+   opacity: 0;
+}
+
 </style>

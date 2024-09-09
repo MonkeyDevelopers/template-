@@ -28,102 +28,104 @@
 </template>
 
 <script setup>
-const options = [
-   {
-      link: "/",
-      icon: "ph:house",
-      name: "Inicio",
-      active: "index",
-      mini: true,
-   },
-   {
-      link: "/",
-      icon: "ph:calendar-dots-light",
-      name: "Agenda",
-      active: "agenda",
-   },
-   {
-      link: "/cargas",
-      icon: "ph:clipboard-text",
-      name: "Cargas",
-      active: "cargas",
-      mini: true,
-   },
-   {
-      link: "/",
-      icon: "ph:clipboard-text",
-      name: "Consultar Cargas",
-      active: "consultar_cargas",
-   },
-   {
-      link: "/",
-      icon: "ph:map-pin-simple-area",
-      name: "GPS",
-      active: "gps",
-   },
-   {
-      link: "/",
-      icon: "ph:cardholder-light",
-      name: "Financeiro",
-      active: "financeiro",
-   },
-   {
-      link: "/expedicao",
-      icon: "ph:paper-plane-tilt",
-      name: "Expedição",
-      active: "expedicao",
-      mini: true,
-   },
-   {
-      link: "/",
-      icon: "ph:chart-line",
-      name: "Faturamento",
-      active: "faturamento",
-   },
-   {
-      link: "/",
-      icon: "ph:file-text",
-      name: "Documentos",
-      active: "documentos",
-   },
-   {
-      link: "/",
-      icon: "ph:warning-octagon",
-      name: "Intervenções",
-      active: "intervencoes",
-   },
-   {
-      link: "/",
-      icon: "ph:flag-banner",
-      name: "Ocorrências",
-      active: "ocorrencias",
-   },
-   {
-      link: "/cadastros",
-      icon: "ph:bookmarks",
-      name: "Cadastros",
-      active: "cadastros",
-   },
-];
+   const options = [
+      {
+         link: "/",
+         icon: "ph:house",
+         name: "Inicio",
+         active: "index",
+         mini: true,
+      },
+      {
+         link: "/",
+         icon: "ph:calendar-dots-light",
+         name: "Agenda",
+         active: "agenda",
+      },
+      {
+         link: "/cargas",
+         icon: "ph:clipboard-text",
+         name: "Cargas",
+         active: "cargas",
+         mini: true,
+      },
+      {
+         link: "/",
+         icon: "ph:clipboard-text",
+         name: "Consultar Cargas",
+         active: "consultar_cargas",
+      },
+      {
+         link: "/",
+         icon: "ph:map-pin-simple-area",
+         name: "GPS",
+         active: "gps",
+      },
+      {
+         link: "/",
+         icon: "ph:cardholder-light",
+         name: "Financeiro",
+         active: "financeiro",
+      },
+      {
+         link: "/expedicao",
+         icon: "ph:paper-plane-tilt",
+         name: "Expedição",
+         active: "expedicao",
+         mini: true,
+      },
+      {
+         link: "/",
+         icon: "ph:chart-line",
+         name: "Faturamento",
+         active: "faturamento",
+      },
+      {
+         link: "/",
+         icon: "ph:file-text",
+         name: "Documentos",
+         active: "documentos",
+      },
+      {
+         link: "/",
+         icon: "ph:warning-octagon",
+         name: "Intervenções",
+         active: "intervencoes",
+      },
+      {
+         link: "/",
+         icon: "ph:flag-banner",
+         name: "Ocorrências",
+         active: "ocorrencias",
+      },
+      {
+         link: "/cadastros",
+         icon: "ph:bookmarks",
+         name: "Cadastros",
+         active: "cadastros",
+      },
+   ];
+   
 
-const actionOptions = [
-	{
-		icon: "ph:gear-fine",
-		name: "Configurações",
-	},
-	{
-		icon: "ph:sign-out",
-		name: "Sair do Sistema",
-	},
-];
 
-const props = defineProps({
-   title: '',
-   description: ''
-});
+   const actionOptions = [
+      {
+         icon: "ph:gear-fine",
+         name: "Configurações",
+      },
+      {
+         icon: "ph:sign-out",
+         name: "Sair do Sistema",
+      },
+   ];
 
-const mobileMenuStore = useMobileMenu();
-const { mobileMenu } = storeToRefs(mobileMenuStore);
+   const props = defineProps({
+      title: '',
+      description: ''
+   });
+
+   const mobileMenuStore = useMobileMenu();
+   const { mobileMenu } = storeToRefs(mobileMenuStore);
 
 </script>
 
