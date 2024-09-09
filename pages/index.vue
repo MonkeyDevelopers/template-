@@ -5,6 +5,9 @@
       description="Dashboard Inicial"
    >
    
+      <div class="container">
+         <DropdownOptions title="Menu" :options="actionOptions" mode="modal_compact" />
+      </div>
    
    </nuxt-layout>
 </template>
@@ -15,6 +18,22 @@
       title: 'Início - Admin'
    });
    
+   const actionOptions = [
+      {
+         icon: "ph:gear-fine",
+         name: "Configurações",
+         action: () => {
+            console.log('Configurações');
+         }
+      },
+      {
+         icon: "ph:sign-out",
+         name: "Sair do Sistema",
+         action: () => {
+            console.log('Sair');
+         }
+      },
+   ];
    
 </script>
 

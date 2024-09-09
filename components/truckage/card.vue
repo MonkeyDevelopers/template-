@@ -50,13 +50,41 @@
       </div>
       <div class="card_col">
          <div class="card_row">
-            <span>Ações</span>
-            <icon name="ph:arrow-square-out" class="card_action_icon" />
+            <!-- <span>Ações</span> -->
+            <DropdownOptions :options="actionOptions" mode="modal_compact" />
          </div>
       </div>
    </div>
    
 </template>
+
+<script setup>
+
+   const actionOptions = [
+      {
+         icon: "ph:arrow-square-out-light",
+         name: "Visualizar",
+         action: () => {
+            console.log('Visualizar');
+         }
+      },
+      {
+         icon: "ph:pencil-simple-light",
+         name: "Editar",
+         action: () => {
+            console.log('Editar');
+         }
+      },
+      {
+         icon: "ph:trash-light",
+         name: "Deletar",
+         action: () => {
+            console.log('Deletar');
+         }
+      },
+   ];
+
+</script>
 
 <style scoped>
 
