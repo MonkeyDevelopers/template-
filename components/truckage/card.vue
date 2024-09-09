@@ -3,14 +3,14 @@
    <div class="card">
       <div class="card_icon">
          <icon name="ph:package" class="icon_card" />
-         <div class="pulse"></div>
+         <Pulse color="success"></Pulse>
       </div>
       <div class="card_col">
          <div class="card_row">
             <span>Rastreio</span>
             <div class="card_labels">
-               <label>NC: CL0001-08-24-1</label>
-               <label>IC: IC0001</label>
+               <Badge>NC: CL0001-08-24-1</Badge>
+               <Badge>IC: IC0001</Badge>               
             </div>
          </div>
          <div class="card_row">
@@ -21,7 +21,7 @@
       <div class="card_col">
          <div class="card_row">
             <span>Status</span>
-            <Badge color="#FF0000">Inicial</Badge>
+            <Badge color="info">Inicial</Badge>
          </div>
          <div class="card_row">
             <span>Prazo de Entrega</span>
@@ -121,19 +121,6 @@
       color: white;
    }
    
-   .pulse {
-      background: #ff5c11;
-      border-radius: 50%;
-      height: 13px;
-      width: 13px;
-      position: absolute;
-      top: -10%;
-      left: -10%;
-      /* box-shadow: 0 0 0 0 rgba(0, 0, 0, 1); */
-      transform: scale(1);
-      animation: pulse 2s infinite;
-   }
-   
    .card_col {
       flex: 1;
       display: flex;
@@ -161,14 +148,6 @@
       color: #d7d7d7;
       font-weight: 500;
       transition: .3s;
-   }
-   
-   .card_row p {
-      color: #ffffff;
-      padding: 3px 8px;
-      border-radius: 3px;
-      background: #003cff4a;
-      font-size: 11px;
    }
    
    .card_labels {
@@ -208,21 +187,6 @@
       }
    }
    
-   @keyframes pulse {
-      0% {
-         transform: scale(0.95);
-         box-shadow: 0 0 0 0 #ff5c11b3;
-      }
 
-      70% {
-         transform: scale(1);
-         box-shadow: 0 0 0 7px rgba(0, 0, 0, 0);
-      }
-
-      100% {
-         transform: scale(0.95);
-         box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-      }
-   }
 
 </style>

@@ -74,7 +74,7 @@ onClickOutside(modal_ref, (event) => {
 	flex-direction: column;
 	align-items: flex-start;
 	user-select: none;
-	box-shadow: 0 0 30px 15px #ffffff09;
+	box-shadow: 0 0 30px 15px #ffffff04;
 }
 
 .modal h2 {

@@ -1,7 +1,6 @@
 <template>
 	<div class="modal_relative">
 		<div @click="openModal()">
-			{{ compact }}
 			<slot></slot>
 		</div>
 
