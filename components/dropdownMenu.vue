@@ -1,49 +1,59 @@
 <template>
-	<div class="modal_header_absolute">
+	<div class="modal_header">
 		<div @click="openModal()">
 			<slot></slot>
 		</div>
-		
+
 		<Transition name="fade">
-			<div class="modal_header_actions" v-if="action" ref="modal_ref">
+			<div class="modal_header_actions" :class="setDirection()" v-if="action" ref="modal_ref">
 				<h2>{{ title }}</h2>
 				<hr>
-				<div class="modal_header_actions_item" v-for="option in options">
-					<icon :name="option.icon" class="modal_header_actions_item_icon" />
+				<div class="modal_header_actions_item" v-for="option in options"
+					@click="option.action">
+					<icon v-if="option.icon" :name="option.icon" class="modal_header_actions_item_icon" />
 					<span>{{ option.name }}</span>
 				</div>
 			</div>
 		</Transition>
-			
+
 	</div>
 
 </template>
 
 <script setup>
-	const action = ref(false);
+const action = ref(false);
 
-	function openModal() {
-		
-		if(action.value) {
-			action.value = false;
-		} else {
-			action.value = true;
-		}
-		
+function setDirection() {
+	if (!props.direction) {
+		return 'bottom-left'
 	}
-	
-	const props = defineProps({
-		title: { type: String, default: "", required: false },
-		options: { type: Array, default: [], required: false },
-	});
+	return props.direction
+}
 
-	const modal_ref = ref(null);
-	onClickOutside(modal_ref, (event) => {
-		if (action.value == true) {
-			action.value = false;
-		}
-	});
-	
+function openModal() {
+
+	if (action.value) {
+		action.value = false;
+	} else {
+		action.value = true;
+	}
+
+}
+
+
+const props = defineProps({
+	title: { type: String, default: "", required: false },
+	options: { type: Array, default: [], required: false },
+	direction: { type: String, default: "bottom-left", required: false },
+});
+
+const modal_ref = ref(null);
+onClickOutside(modal_ref, (event) => {
+	if (action.value == true) {
+		action.value = false;
+	}
+});
+
 </script>
 
 <style scoped>
@@ -61,8 +71,29 @@
 	color: white;
 }
 
-.modal_header_absolute {
+.modal_header {
 	position: relative;
+}
+
+.top-right {
+	position: absolute;
+	top: -110%;
+	left: 0;
+}
+.top-left {
+	position: absolute;
+	bottom: 110%;
+	right: 0;
+}
+.bottom-right {
+	position: absolute;
+	top: 110%;
+	left: 0;
+}
+.bottom-left {
+	position: absolute;
+	bottom: 110%;
+	right: 0;
 }
 
 .modal_header_actions {
@@ -71,9 +102,6 @@
 	border: 2px solid #171717;
 	border-radius: 6px;
 	padding: 15px;
-	position: absolute;
-	top: 110%;
-	right: 0;
 	z-index: 5;
 	display: flex;
 	flex-direction: column;
@@ -138,17 +166,16 @@
 /* transition */
 
 .fade-enter-active {
-   transition: all .2s;
+	transition: all .2s;
 }
 
 .fade-leave-active {
-   transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 
 .fade-enter-from,
 .fade-leave-to {
-   opacity: 1;
-   opacity: 0;
+	opacity: 1;
+	opacity: 0;
 }
-
 </style>
