@@ -112,11 +112,11 @@ onClickOutside(modal_ref, (event) => {
 }
 
 .modal_item:hover span {
-	color: white;
+	color: #c51b1b;
 }
 
 .modal_item:hover .modal_icon {
-	color: white;
+	color: #c51b1b;
 }
 
 /* modal default */
