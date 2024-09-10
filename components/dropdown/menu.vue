@@ -106,7 +106,7 @@ onClickOutside(modal_ref, (event) => {
 
 .modal_icon {
 	color: #959595;
-	transition: .0.5s !important;
+	transition: .05s !important;
 }
 
 .modal_item:hover span {
