@@ -99,7 +99,7 @@
    
    .select_component h2 {
       font-size: 12px;
-      font-weight: 300;
+      font-weight: 400;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -163,7 +163,11 @@
    }
    
    .select_options .selected_option {
-      background: #131313;
+      background: #c51b1b;
+   }
+   
+   .select_options .selected_option:hover {
+      background: #d62222;
    }
    
    .select_input {
