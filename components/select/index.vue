@@ -58,7 +58,6 @@
       changeSelectState('close')
    }
       
-
    onClickOutside([select_ref, open_select_ref], (event) => {
       if (
          state.value == true && 
@@ -69,16 +68,12 @@
       }
    });
    
-
-
    const filteredOptions = computed(() => {
       return props.options.filter(option => 
          option.name.toLowerCase().includes(filterText.value.toLowerCase())
       );
    });
    
-
-
 </script>
 
 <style scoped>
@@ -187,6 +182,11 @@
       background: #0E0E0E;
       color: #e6e6e6;
       flex: 1;
+   }
+   
+   .select_input .select_input_icon {
+      font-size: 13px;
+      color: #747474;
    }
    
    
