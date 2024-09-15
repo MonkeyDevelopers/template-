@@ -37,10 +37,10 @@ const options = [
       mini: true,
    },
    {
-      link: "/",
+      link: "/date-picker",
       icon: "ph:calendar-dots-light",
-      name: "Agenda",
-      active: "agenda",
+      name: "Date Picker",
+      active: "date_picker",
    },
    {
       link: "/cargas",
