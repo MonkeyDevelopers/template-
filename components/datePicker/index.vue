@@ -1,5 +1,4 @@
 <template>
-  Inicial: {{ inicial }}
   <div class="input" @click="changeCalendarState('true')" ref="input">
     <icon name="ph:calendar-blank" class="input_icon" />
     <h2>
