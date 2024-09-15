@@ -29,7 +29,7 @@
       options: Array,
    });
    
-   const state = ref(false);  
+   const state = ref(false); 
    const filterText = ref('');
    const select_ref = ref(null);
    const open_select_ref = ref(null);
