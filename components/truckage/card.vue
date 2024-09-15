@@ -3,14 +3,14 @@
    <div class="card">
       <div class="card_icon">
          <icon name="ph:package" class="icon_card" />
-         <Pulse color="success"></Pulse>
+         <UIPulse color="success"></UIPulse>
       </div>
       <div class="card_col">
          <div class="card_row">
             <span>Rastreio</span>
             <div class="card_labels">
-               <Badge>NC: CL0001-08-24-1</Badge>
-               <Badge>IC: IC0001</Badge>               
+               <UIBadge>NC: CL0001-08-24-1</UIBadge>
+               <UIBadge>IC: IC0001</UIBadge>               
             </div>
          </div>
          <div class="card_row">
@@ -21,7 +21,7 @@
       <div class="card_col">
          <div class="card_row">
             <span>Status</span>
-            <Badge color="info">Inicial</Badge>
+            <UIBadge color="info">Inicial</UIBadge>
          </div>
          <div class="card_row">
             <span>Prazo de Entrega</span>
@@ -51,7 +51,7 @@
       <div class="card_col">
          <div class="card_row">
             <!-- <span>Ações</span> -->
-            <DropdownOptions :options="actionOptions" compact />
+            <UIDropdownOptions :options="actionOptions" compact />
          </div>
       </div>
    </div>

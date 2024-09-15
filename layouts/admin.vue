@@ -1,5 +1,5 @@
 <template>
-  <UISidebar>
+  <UISidebar class="menu">
     <template #header>
       <SidebarHeader />
     </template>
@@ -207,8 +207,11 @@ const { mobileMenu } = storeToRefs(mobileMenuStore);
   .bottom {
     display: flex;
   }
-}
 
+  .menu {
+    display: none;
+  }
+}
 
 .fade-enter-active {
   transition: all 0.2s;
