@@ -1,5 +1,5 @@
 <template>
-   <SidebarMobileBg />
+   <UISidebarMobileBg />
 
    <Transition name="slide-fade">
       <div class="mobile_sidebar_container" v-if="mobileMenu">
