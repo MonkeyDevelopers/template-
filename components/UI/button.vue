@@ -1,14 +1,25 @@
 <template>
-  <button @click="handleClick">
-	<slot></slot>
+  <button
+    @click="handleClick"
+    :style="{
+      '--color': UseColor.setColor(color),
+      '--shadow-color': UseColor.setColor(color) + '99',
+    }"
+  >
+    <slot></slot>
   </button>
 </template>
 
 <script setup>
-const emit = defineEmits(['click']);
+const emit = defineEmits(["click"]);
 
+const props = defineProps({
+  color: { type: String },
+});
+
+const UseColor = useColor(props.color);
 const handleClick = () => {
-  emit('click');
+  emit("click");
 };
 </script>
 <style scoped>
@@ -21,11 +32,11 @@ button {
   font-weight: 400;
   cursor: pointer;
   transition: 0.3s;
-  background: #c51b1b;
   color: #ffffff;
+  background-color: var(--color);
 }
 
 button:hover {
-  background: #971616;
+  background-color: var(--shadow-color);
 }
 </style>

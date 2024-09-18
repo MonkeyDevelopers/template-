@@ -11,7 +11,6 @@
   <KoSidebarBottom class="bottom">
     <SidebarBottom :options="options" />
   </KoSidebarBottom>
-  <UISidebarMobile :options exclusive />
 
   <div class="layout_container">
     <header class="header">

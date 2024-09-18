@@ -2,7 +2,8 @@
   <nuxt-layout name="admin" title="Início" description="Dashboard Inicial">
     <div class="card">
       <h1>{{ test.value }}</h1>
-      <UIButton @click="test.add"> Add essa caralha +</UIButton>
+      <UIButton color="primary" @click="test.add"> Add essa caralha +</UIButton>
+      <UIButton color="secondary" @click="test.add"> Add essa caralha (so que laranja)</UIButton>
     </div>
   </nuxt-layout>
 </template>
@@ -44,6 +45,5 @@ const test = useTest();
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
 }
 </style>
