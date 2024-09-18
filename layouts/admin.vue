@@ -20,7 +20,15 @@
         <p>{{ description }}</p>
       </div>
       <KoDropdownMenu :options="actionOptions" compact>
-        <icon name="ph:gear-fine" class="header_menu_icon" />
+        <template #default>
+          <icon name="ph:gear-fine" class="header_menu_icon" />
+        </template>
+        <template #option="{ option }" class="modal_item">
+          <icon :name="option.icon" class="modal_icon" />
+          <span>
+            {{ option.name }}
+          </span>
+        </template>
       </KoDropdownMenu>
     </header>
 
@@ -194,6 +202,39 @@ const { mobileMenu } = storeToRefs(mobileMenuStore);
   padding: 20px;
   color: white;
   padding-bottom: 200px;
+}
+
+/* modal_item */
+.modal_item {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+	cursor: pointer;
+	transition: .3s;
+}
+
+.modal_item:hover {
+	background: #171717;
+}
+
+.modal_item span {
+	color: #959595;
+	transition: .3s;
+}
+
+.modal_icon {
+	color: #959595;
+	transition: .05s !important;
+}
+
+.modal_item:hover span {
+	color: #c51b1b;
+}
+
+.modal_item:hover .modal_icon {
+	color: #c51b1b;
 }
 
 /* responsive */
