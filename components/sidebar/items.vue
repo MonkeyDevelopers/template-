@@ -3,7 +3,7 @@
     v-for="option in options"
     :href="option.link"
     class="item"
-    :class="useRoute().name == option.active ? 'item_active' : ''"
+    :class="{ item_active: useRoute().name == option.active }"
   >
     <icon class="item_icon" :name="option.icon" />
     <span>{{ option.name }}</span>

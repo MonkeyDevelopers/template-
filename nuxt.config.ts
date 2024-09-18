@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@vueuse/nuxt',
     'nuxt-mapbox',
+    'koro-ui'
   ],
   
   mapbox: {

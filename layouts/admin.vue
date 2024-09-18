@@ -1,5 +1,5 @@
 <template>
-  <UISidebar class="menu">
+  <KoSidebar class="menu">
     <template #header>
       <SidebarHeader />
     </template>
@@ -7,10 +7,10 @@
     <template #default>
       <SidebarItems :options="options" />
     </template>
-  </UISidebar>
-  <UISidebarBottom class="bottom">
+  </KoSidebar>
+  <KoSidebarBottom class="bottom">
     <SidebarBottom :options="options" />
-  </UISidebarBottom>
+  </KoSidebarBottom>
   <UISidebarMobile :options exclusive />
 
   <div class="layout_container">
@@ -19,10 +19,9 @@
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
       </div>
-
-      <UIDropdownMenu :options="actionOptions" compact>
+      <KoDropdownMenu :options="actionOptions" compact>
         <icon name="ph:gear-fine" class="header_menu_icon" />
-      </UIDropdownMenu>
+      </KoDropdownMenu>
     </header>
 
     <div class="layout_body">
@@ -198,6 +197,9 @@ const { mobileMenu } = storeToRefs(mobileMenuStore);
 }
 
 /* responsive */
+.bottom {
+  display: none;
+}
 
 @media screen and (max-width: 1024px) {
   .layout_container {

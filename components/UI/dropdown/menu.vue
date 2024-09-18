@@ -20,6 +20,7 @@
 </template>
 
 <script setup>
+import { defineProps, ref } from 'vue';
 const action = ref(false);
 
 function setDirection() {
