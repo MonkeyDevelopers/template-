@@ -17,19 +17,21 @@
           name="ph:caret-left-bold"
           class="control_icon"
           @click="useCalendar.prevMonth()"
+          v-if="!useCalendar.isMonthSelection.value"
         />
-        <span
-          >{{ useCalendar.currentMonthName }}
-          {{ useCalendar.currentYear }}</span
-        >
+        <div class="calendar_spans">
+          <span class="span_month" v-if="!useCalendar.isYearSelection.value" @click="useCalendar.toggleMonthSelection()">{{ useCalendar.currentMonthName }}</span>
+          <span class="span_year" v-if="!useCalendar.isMonthSelection.value" @click="useCalendar.toggleYearSelection()">{{ useCalendar.currentYear }}</span>
+        </div>
         <icon
           name="ph:caret-right-bold"
           class="control_icon"
           @click="useCalendar.nextMonth()"
+          v-if="!useCalendar.isMonthSelection.value"
         />
       </div>
-
-      <div class="calendar">
+      
+      <div class="calendar" v-if="!useCalendar.isYearSelection.value && !useCalendar.isMonthSelection.value">
         <div class="day_head">Dom</div>
         <div class="day_head">Seg</div>
         <div class="day_head">Ter</div>
@@ -55,8 +57,23 @@
           {{ day ? day : "" }}
         </div>
       </div>
+      
+      <div class="year_selection" v-if="useCalendar.isYearSelection.value">
+        <span
+          v-for="year in useCalendar.yearsList.value"
+          @click="useCalendar.selectYear(year)"
+          :class="{'selected_year': year === useCalendar.currentDate.value.getFullYear()}"
+        >{{ year }}</span>
+      </div>
+      <div class="month_selection" v-if="useCalendar.isMonthSelection.value">
+        <span
+          v-for="(month, index) in useCalendar.fullMonthNames"
+          @click="useCalendar.selectMonth(index)"
+          :class="{'selected_month': useCalendar.currentDate.value.getMonth() === index}"
+        >{{ month }}</span>
+      </div>
 
-      <div class="actions">
+      <div class="actions" v-if="!useCalendar.isYearSelection.value && !useCalendar.isMonthSelection.value">
         <span @click="clearDate">Limpar</span>
         <span @click="selectToday">Hoje</span>
       </div>
@@ -78,8 +95,15 @@ const emit = defineEmits(["update:modelValue"]);
 const selectedDate = ref(null);
 
 function useFunctionCalendar() {
+  
+  const isMonthSelection = ref(false);
+  const isYearSelection = ref(false);
+  
   const currentDate = ref(new Date());
   const currentYear = computed(() => currentDate.value.getFullYear());
+  const yearsRange = 12;
+  const startYear = ref(currentYear.value - yearsRange);
+  
   const currentMonth = computed(() => currentDate.value.getMonth());
   const changeDaysInMonth = () => {
     const firstDayMonth = new Date(
@@ -107,21 +131,44 @@ function useFunctionCalendar() {
   const daysInMonth = ref(changeDaysInMonth());
 
   const prevMonth = () => {
-    const newDate = new Date(currentDate.value);
-    newDate.setMonth(currentDate.value.getMonth() - 1);
-    currentDate.value = newDate;
+    if(isYearSelection.value) {
+      startYear.value -= yearsRange * 2 + 1;
+    } else {
+      const newDate = new Date(currentDate.value);
+      newDate.setMonth(currentDate.value.getMonth() - 1);
+      currentDate.value = newDate;
 
-    daysInMonth.value = changeDaysInMonth();
+      daysInMonth.value = changeDaysInMonth();
+    }
   };
 
   const nextMonth = () => {
-    const newDate = new Date(currentDate.value);
-    newDate.setMonth(currentDate.value.getMonth() + 1);
-    currentDate.value = newDate;
+    if(isYearSelection.value) {
+      startYear.value += yearsRange * 2 + 1;
+    } else {
+      const newDate = new Date(currentDate.value);
+      newDate.setMonth(currentDate.value.getMonth() + 1);
+      currentDate.value = newDate;
 
-    daysInMonth.value = changeDaysInMonth();
+      daysInMonth.value = changeDaysInMonth(); 
+    }
   };
-
+  
+  const fullMonthNames = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+  ];
+  
   const monthNames = [
     "Jan",
     "Fev",
@@ -138,7 +185,7 @@ function useFunctionCalendar() {
   ];
 
   const currentMonthName = computed(() => {
-    return monthNames[currentMonth.value];
+    return fullMonthNames[currentMonth.value];
   });
 
   const formatDateToShow = (date) => {
@@ -154,6 +201,57 @@ function useFunctionCalendar() {
       date.getFullYear() === currentYear.value
     );
   };
+  
+  const toggleYearSelection = () => {
+    isYearSelection.value = !isYearSelection.value;
+    isMonthSelection.value = false;
+  };
+
+  const toggleMonthSelection = () => {
+    isMonthSelection.value = !isMonthSelection.value;
+    isYearSelection.value = false;
+  };
+  
+  const selectMonth = (monthIndex) => {
+    const newDate = new Date(currentDate.value);
+    newDate.setMonth(monthIndex);
+    currentDate.value = newDate;
+    daysInMonth.value = changeDaysInMonth(); 
+    isMonthSelection.value = false;
+  };
+  
+  const generateYearsList = () => {
+    const years = [];
+    for (let i = startYear.value; i < startYear.value + (yearsRange * 2) + 1; i++) {
+      years.push(i);
+    }
+    return years;
+  };
+
+  const yearsList = ref(generateYearsList());
+  
+  watch(startYear, () => {
+    yearsList.value = generateYearsList();
+  }, { immediate: true });
+  
+  const updateStartYear = () => {
+    startYear.value = currentYear.value - yearsRange;
+  }
+  
+  const selectYear = (year) => {
+    const newDate = new Date(currentDate.value);
+    newDate.setFullYear(year);
+    currentDate.value = newDate;
+    daysInMonth.value = changeDaysInMonth();
+    isYearSelection.value = false;
+  };
+  
+  const resetCalendar = () => {
+    state.value = false;
+    updateStartYear();
+    isMonthSelection.value = false;
+    isYearSelection.value = false;
+  }
 
   return {
     prevMonth,
@@ -164,7 +262,20 @@ function useFunctionCalendar() {
     currentYear,
     currentMonth,
     currentMonthName,
+    changeDaysInMonth,
     daysInMonth,
+    isMonthSelection,
+    isYearSelection,
+    toggleMonthSelection,
+    toggleYearSelection,
+    monthNames,
+    fullMonthNames,
+    selectMonth,
+    yearsList,
+    selectYear,
+    startYear,
+    updateStartYear,
+    resetCalendar,
   };
 }
 
@@ -173,7 +284,7 @@ const useCalendar = useFunctionCalendar();
 // Componente
 const formatDate = (date) => {
   const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // O mês começa do zero
+  const month = String(date.getMonth() + 1).padStart(2, "0");
   const year = date.getFullYear();
   return `${year}-${month}-${day}`;
 };
@@ -183,6 +294,7 @@ const selectDate = (day) => {
     const newDate = new Date(useCalendar.currentDate.value);
     newDate.setDate(day);
     selectedDate.value = newDate;
+    useCalendar.updateStartYear();
     emit("update:modelValue", formatDate(newDate));
     // state.value = false;
   }
@@ -197,6 +309,8 @@ const selectToday = () => {
   const today = new Date();
   selectedDate.value = today;
   useCalendar.currentDate.value = today;
+  useCalendar.daysInMonth.value = useCalendar.changeDaysInMonth();
+  useCalendar.updateStartYear();
   emit("update:modelValue", formatDate(today));
 };
 
@@ -208,7 +322,7 @@ onClickOutside([date_picker, input], (event) => {
     !date_picker.value.contains(event.target) &&
     !input.value.contains(event.target)
   ) {
-    state.value = false;
+    useCalendar.resetCalendar();
   }
 });
 
@@ -216,7 +330,7 @@ const state = ref(false); // false = closed, true = open
 const changeCalendarState = (option) => {
   if (option == "true") {
     if (state.value == true) {
-      state.value = false;
+      useCalendar.resetCalendar();
     } else {
       // if (selectedDate.value) {
       //   currentDate.value = new Date(selectedDate.value);
@@ -226,7 +340,7 @@ const changeCalendarState = (option) => {
       state.value = true;
     }
   } else {
-    state.value = false;
+    useCalendar.resetCalendar();
   }
 };
 
@@ -299,8 +413,92 @@ onMounted(() => {
   margin-bottom: 10px;
 }
 
-.date_picker_head span {
-  font-size: 13px;
+.calendar_spans {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar_spans span {
+  padding: 3px 9px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .3s;
+  color: white;
+  font-size: 13px
+}
+
+.calendar_spans span:hover {
+  background: #222222;
+}
+
+.month_selection {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  transition: .3s;
+}
+
+.month_selection span {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .3s;
+  color: white;
+  font-size: 12px
+}
+
+.month_selection span:hover {
+  background: #222222;
+}
+
+.selected_month {
+  color: #ffffff;
+  background-color: #c51b1b;
+}
+
+.selected_month:hover {
+  background-color: #a61717 !important;
+  transition: 0.3s;
+}
+
+.year_selection {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  transition: .3s;
+}
+
+.year_selection span {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: .3s;
+  color: white;
+  font-size: 12px
+}
+
+.year_selection span:hover {
+  background: #222222;
+}
+
+.selected_year {
+  color: #ffffff;
+  background-color: #c51b1b;
+}
+
+.selected_year:hover {
+  background-color: #a61717 !important;
+  transition: 0.3s;
 }
 
 .control_icon {
@@ -321,7 +519,6 @@ onMounted(() => {
 .calendar {
   width: 100%;
   display: grid;
-  gap: 5px;
   grid-template-columns: repeat(7, 1fr);
 }
 
