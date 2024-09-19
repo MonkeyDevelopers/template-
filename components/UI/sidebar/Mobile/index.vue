@@ -2,7 +2,11 @@
    <UISidebarMobileBg />
 
    <Transition name="slide-fade">
-      <div class="mobile_sidebar_container" v-if="mobileMenu">
+      <div class="mobile_sidebar_container" v-if="mobileMenu" 
+      :style="{
+         '--color': color,
+      }"
+      >
          <div class="sidebar">
 
             <a href="/" class="sidebar_header">
@@ -29,7 +33,10 @@ const { mobileMenu } = storeToRefs(mobileMenuStore);
 const props = defineProps({
 	options: { type: Object, default: {}, required: true },
    exclusive: { type: Boolean, default: false, required: false },
+   color: { type: String, default: "", required: false },
 });
+
+const color = props.color || useColor().colors.primary;
 
 const miniOptions = computed(() => {
    if(props.exclusive) {
@@ -107,7 +114,7 @@ const miniOptions = computed(() => {
 }
 
 .sidebar_item_active {
-   background: #c51b1b !important;
+   background: var(--color) !important;
 }
 
 .sidebar_item_active span {
@@ -156,7 +163,7 @@ const miniOptions = computed(() => {
 
 .sidebar_header_icon {
    font-size: 24px !important;
-   color: #c51b1b;
+   color: var(--color);
 }
 
 

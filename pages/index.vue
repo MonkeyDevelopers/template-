@@ -2,8 +2,8 @@
   <nuxt-layout name="admin" title="Início" description="Dashboard Inicial">
     <div class="card">
       <h1>{{ test.value }}</h1>
-      <UIButton color="primary" @click="test.add"> Add essa caralha +</UIButton>
-      <UIButton color="secondary" @click="test.add"> Add essa caralha (so que laranja)</UIButton>
+      <KoButton color="primary" @click="test.add"> Add essa caralha +</KoButton>
+      <KoButton color="secondary" @click="test.add"> Add essa caralha (so que laranja)</KoButton>
     </div>
   </nuxt-layout>
 </template>
@@ -14,7 +14,7 @@ useHead({
 });
 
 const useTest = () => {
-  const value = ref(2120);
+  const value = ref(2203);
 
   const add = () => {
     value.value++;

@@ -12,7 +12,12 @@
     <SidebarBottom :options="options" />
   </KoSidebarBottom>
 
-  <div class="layout_container">
+  <div
+    class="layout_container"
+    :style="{
+      '--color': $colors.primary,
+    }"
+  >
     <header class="header">
       <div class="header_title">
         <h2>{{ title }}</h2>
@@ -119,7 +124,7 @@ const options = [
     icon: "ph:sign-out",
     name: "Sair",
     active: "sair",
-  }
+  },
 ];
 
 const actionOptions = [
@@ -211,35 +216,35 @@ const { mobileMenu } = storeToRefs(mobileMenuStore);
 
 /* modal_item */
 .modal_item {
-	width: 100%;
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	position: relative;
-	cursor: pointer;
-	transition: .3s;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .modal_item:hover {
-	background: #171717;
+  background: #171717;
 }
 
 .modal_item span {
-	color: #959595;
-	transition: .3s;
+  color: #959595;
+  transition: 0.3s;
 }
 
 .modal_icon {
-	color: #959595;
-	transition: .05s !important;
+  color: #959595;
+  transition: 0.05s !important;
 }
 
 .modal_item:hover span {
-	color: #c51b1b;
+  color: var(--color);
 }
 
 .modal_item:hover .modal_icon {
-	color: #c51b1b;
+  color: var(--color);
 }
 
 /* responsive */

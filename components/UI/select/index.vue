@@ -5,7 +5,12 @@
       <icon name="ph:caret-down-bold" class="select_icon" :class="state ? 'select_icon_rotate' : 'select_icon_rotate_deny'" />
    </div>
    <Transition name="select-show">
-      <div class="select_options" ref="select_ref" v-if="state">
+      <div class="select_options" ref="select_ref" v-if="state" 
+      :style="{
+         '--color': $colors.primary,
+         '--shadow-color': $colors.primary + '99',
+      }"
+      >
          <div class="select_input">
             <icon name="ph:magnifying-glass" class="select_input_icon" />
             <input v-model="filterText" type="text" placeholder="Pesquisar">
@@ -163,11 +168,11 @@
    }
    
    .select_options .selected_option {
-      background: #c51b1b;
+      background: var(--color);
    }
    
    .select_options .selected_option:hover {
-      background: #d62222;
+      background: var(--shadow-color);
    }
    
    .select_input {

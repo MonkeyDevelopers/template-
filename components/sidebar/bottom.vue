@@ -3,7 +3,10 @@
     v-for="option in miniOptions"
     :href="option.link"
     class="item"
-    :class="{ 'item_active': useRoute().name == option.active }"
+    :class="{ item_active: useRoute().name == option.active }"
+    :style="{
+      '--color': $colors.primary,
+    }"
   >
     <icon class="item_icon" :name="option.icon" />
     <span>{{ option.name }}</span>
@@ -29,54 +32,52 @@ const miniOptions = computed(() => {
 </script>
 
 <style scoped>
-
 .item {
-    padding: 6px;
-    border-radius: 8px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    transition: .3s;
+  padding: 6px;
+  border-radius: 8px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .item:hover {
-    background: #171717;
+  background: #171717;
 }
 
 .item:hover span {
-    color: white;
+  color: white;
 }
 
 .item:hover .item_icon {
-    color: white;
+  color: white;
 }
 
 .item_active {
-    background: #c51b1b !important;
+  background: var(--color) !important;
 }
 
 .item_active span {
-    color: white !important;
-    font-weight: 300;
+  color: white !important;
+  font-weight: 300;
 }
 
 .item_active .item_icon {
-    color: white !important;
+  color: white !important;
 }
 
 .item_icon {
-    font-size: 18px !important;
-    color: #959595;
-    transition: .3s !important;
+  font-size: 18px !important;
+  color: #959595;
+  transition: 0.3s !important;
 }
 
 .item span {
-    white-space: nowrap;
-    font-size: 13px;
-    color: #959595;
-    transition: .3s;
+  white-space: nowrap;
+  font-size: 13px;
+  color: #959595;
+  transition: 0.3s;
 }
-
 </style>

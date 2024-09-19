@@ -9,45 +9,15 @@
    const props = defineProps({
       color: {
          type: String,
-         default: '#484848'
+         default: "#202020"
       }
    });
-   
-   function setColor() {
-      
-      const colors = {
-         success: '#11ff9c',
-         warning: '#ff8811',
-         danger: '#ff1111',
-         info: '#0048ff',
-         disabled: '#202020'
-      };
-      
-      if(!props.color) {
-            return disabled;
-        }
 
-        if (props.color.startsWith('#')) {
-            return props.color;
-        }
+   const UseColor = useColor(props.color);
 
-        switch (props.color) {
-            case 'success':
-                return colors.success;
-            case 'warning':
-                return colors.warning;
-            case 'danger':
-                return colors.danger;
-            case 'info':
-                return colors.info;
-            default:
-                return colors.disabled;
-        }
-   }
-   
    const badgeStyle = computed(() => ({
-      '--badge-color': setColor(),
-      '--badge-shadow-color': setColor() + '99'
+      '--badge-color': UseColor.setColor(props.color),
+      '--badge-shadow-color': UseColor.setColor(props.color) + '99'
    }));
 
 </script>

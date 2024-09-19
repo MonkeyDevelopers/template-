@@ -1,5 +1,9 @@
 <template>
-    <div class="label" :class="{ selected: isSelected }" @click="toggleSelection">
+    <div class="label" :class="{ selected: isSelected }" @click="toggleSelection" 
+        :style="{
+            '--color': color,
+        }"
+    >
         {{ item.name }}
     </div>
 </template>
@@ -13,8 +17,15 @@ const props = defineProps({
     initialSelected: {
         type: Boolean,
         default: false
-    }
+    },
+    color: {
+        type: String,
+        required: false,
+        default: "",
+    },
 })
+
+const color = props.color || useColor().colors.primary;
 
 const emit = defineEmits(['update'])
 
@@ -47,6 +58,6 @@ const toggleSelection = () => {
 }
 
 .label.selected {
-    background: #c51b1b;
+    background: var(--color);
 }
 </style>

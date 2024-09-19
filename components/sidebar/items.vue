@@ -4,6 +4,9 @@
     :href="option.link"
     class="item"
     :class="{ item_active: useRoute().name == option.active }"
+    :style="{
+      '--color': $colors.primary,
+    }"
   >
     <icon class="item_icon" :name="option.icon" />
     <span>{{ option.name }}</span>
@@ -51,7 +54,7 @@ const props = defineProps({
 }
 
 .item_active {
-  background: #c51b1b !important;
+  background: var(--color)!important;
 }
 
 .item_active span {

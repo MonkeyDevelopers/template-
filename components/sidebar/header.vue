@@ -1,5 +1,11 @@
 <template>
-  <a href="/" class="sidebar_header">
+  <a
+    href="/"
+    class="sidebar_header"
+    :style="{
+      '--color': $colors.primary,
+    }"
+  >
     <icon class="sidebar_header_icon" name="ph:package" />
     <span>Admin</span>
   </a>
@@ -35,6 +41,6 @@
 
 .sidebar_header_icon {
   font-size: 24px !important;
-  color: #c51b1b;
+  color: var(--color);
 }
 </style>
