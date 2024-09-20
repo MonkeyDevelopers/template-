@@ -4,7 +4,7 @@ export default defineAppConfig({
             primary: "#c51b1b",
             secondary: "#F28C28",
             third: "#F2F2F2",
-            success: "#11ff9c",
+            success: "#0dc679",
             warning: "#ff8811",
             danger: "#ff1111",
             info: "#0048ff",

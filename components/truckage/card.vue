@@ -3,7 +3,7 @@
    <div class="card">
       <div class="card_icon">
          <icon name="ph:package" class="icon_card" />
-         <UIPulse color="success"></UIPulse>
+         <KoPulse color="success"></KoPulse>
       </div>
       <div class="card_col">
          <div class="card_row">

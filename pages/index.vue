@@ -1,9 +1,18 @@
 <template>
   <nuxt-layout name="admin" title="Início" description="Dashboard Inicial">
-    <div class="card">
-      <h1>{{ test.value }}</h1>
-      <KoButton color="primary" @click="test.add"> Add essa caralha +</KoButton>
-      <KoButton color="secondary" @click="test.add"> Add essa caralha (so que laranja)</KoButton>
+    <div class="idk">
+      <div class="card">
+        <h1>{{ test.value }}</h1>
+        <KoButton color="primary" @click="test.add">
+          Add essa caralha +</KoButton
+        >
+        <KoButton color="secondary" @click="test.add">
+          Add essa caralha (so que laranja)</KoButton
+        >
+      </div>
+      <div class="card">
+        <Test />
+      </div>
     </div>
   </nuxt-layout>
 </template>
@@ -34,6 +43,10 @@ const test = useTest();
 </script>
 
 <style scoped>
+.idk {
+  display: flex;
+  gap: 50px;
+}
 .card {
   width: 320px;
   height: 100%;
