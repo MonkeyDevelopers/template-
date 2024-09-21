@@ -13,6 +13,9 @@
       <div class="card">
         <Test />
       </div>
+      <div class="card">
+        <Testuser />
+      </div>
     </div>
   </nuxt-layout>
 </template>

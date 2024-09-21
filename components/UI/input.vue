@@ -1,7 +1,9 @@
 <template>
-  <span v-if="label">{{ label }}</span>
-  <span v-if="!label"><slot></slot></span>
-  <input :type :placeholder v-model="value" />
+  <div>
+    <p>{{ label }}</p>
+    <p v-if="!label"><slot></slot></p>
+    <input :type :placeholder v-model="value" />
+  </div>
 </template>
 
 <script setup>
@@ -27,7 +29,7 @@ const value = defineModel({ required: false, default: "" });
 </script>
 
 <style scoped>
-span {
+p {
   font-size: 13px;
   font-weight: 400;
   color: #5d5d5d;

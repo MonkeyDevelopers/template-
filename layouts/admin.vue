@@ -119,12 +119,6 @@ const options = [
     name: "Cadastros",
     active: "cadastros",
   },
-  {
-    link: "/login",
-    icon: "ph:sign-out",
-    name: "Sair",
-    active: "sair",
-  },
 ];
 
 const actionOptions = [
