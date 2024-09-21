@@ -1,9 +1,7 @@
 <template>
-  <div>
     <p>{{ label }}</p>
     <p v-if="!label"><slot></slot></p>
     <input :type :placeholder v-model="value" />
-  </div>
 </template>
 
 <script setup>
@@ -41,19 +39,14 @@ input {
   padding: 9px;
   font-size: 12px;
   border-radius: 4px;
-  border: 1px solid #1e1e1e;
-  background: #131313;
+  border: 1px solid #171717;
   transition: 0.3s;
+  background: none;
   color: #cecece;
 }
 
-input:first-child {
-  margin-top: 50px !important;
-}
-
 input:focus {
-  border: 1px solid #282828;
-  background: #191919;
+  border: 1px solid #464646;
 }
 
 input::placeholder {

@@ -52,6 +52,13 @@ const options = [
     mini: true,
   },
   {
+    link: "/table",
+    icon: "ph:house",
+    name: "Tabela",
+    active: "table",
+    mini: true,
+  },
+  {
     link: "/date-picker",
     icon: "ph:calendar-dots-light",
     name: "Date Picker",
@@ -62,62 +69,7 @@ const options = [
     icon: "ph:clipboard-text",
     name: "Cargas",
     active: "cargas",
-    mini: true,
-  },
-  {
-    link: "/",
-    icon: "ph:clipboard-text",
-    name: "Consultar Cargas",
-    active: "consultar_cargas",
-  },
-  {
-    link: "/",
-    icon: "ph:map-pin-simple-area",
-    name: "GPS",
-    active: "gps",
-  },
-  {
-    link: "/",
-    icon: "ph:cardholder-light",
-    name: "Financeiro",
-    active: "financeiro",
-  },
-  {
-    link: "/expedicao",
-    icon: "ph:paper-plane-tilt",
-    name: "Expedição",
-    active: "expedicao",
-    mini: true,
-  },
-  {
-    link: "/",
-    icon: "ph:chart-line",
-    name: "Faturamento",
-    active: "faturamento",
-  },
-  {
-    link: "/",
-    icon: "ph:file-text",
-    name: "Documentos",
-    active: "documentos",
-  },
-  {
-    link: "/",
-    icon: "ph:warning-octagon",
-    name: "Intervenções",
-    active: "intervencoes",
-  },
-  {
-    link: "/",
-    icon: "ph:flag-banner",
-    name: "Ocorrências",
-    active: "ocorrencias",
-  },
-  {
-    link: "/cadastros",
-    icon: "ph:bookmarks",
-    name: "Cadastros",
-    active: "cadastros",
+    // mini: true,
   },
 ];
 

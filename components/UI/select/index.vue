@@ -1,6 +1,6 @@
 <template>
    
-   <div class="select_component" ref="open_select_ref" @click="changeSelectState()">
+   <div :title="selectedOption ? selectedOption.name : 'Selecione uma Opção'" class="select_component" ref="open_select_ref" @click="changeSelectState()">
       <h2>{{ selectedOption ? selectedOption.name : 'Selecione uma Opção' }}</h2>
       <icon name="ph:caret-down-bold" class="select_icon" :class="state ? 'select_icon_rotate' : 'select_icon_rotate_deny'" />
    </div>
@@ -21,6 +21,7 @@
             :key="option.value"
             :class="{ selected_option: option.id === modelValue }"
             @click="selectOption(option.id)"
+            :title="option.name"
          >{{ option.name }}</span>
       </div>
    </Transition>
@@ -89,11 +90,10 @@
    }
 
    .select_component {
-      width: 300px;
-      padding: 13px 15px;
-      border-radius: 6px;
-      background: #0E0E0E;
-      border: 2px solid #171717;
+      width: 100%;
+      padding: 9px 15px;
+      border-radius: 4px;
+      border: 1px solid #171717;
       cursor: pointer;
       transition: .3s;
       display: flex;
@@ -117,13 +117,13 @@
    }
    
    .select_component:hover {
-      border: 2px solid #1c1c1c;
+      border: 1px solid #1c1c1c;
    }
    
    /* options */
    
    .select_options {
-      width: 300px;
+      max-width: 250px;
       display: flex;
       flex-direction: column;
       padding: 3px;
@@ -131,7 +131,7 @@
       row-gap: 3px;
       border-radius: 6px;
       background: #0E0E0E;
-      border: 2px solid #171717;
+      border: 1px solid #171717;
       position: absolute;
       z-index: 9999;
       margin-top: 3px;
