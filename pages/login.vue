@@ -3,32 +3,81 @@
     <div class="container">
       <!-- <img src="/logo.png" alt="" /> -->
       <h2>Bem-vindo de volta!</h2>
-
       <form class="form">
-        <div>
-          <UIInput label="Usuário" v-model="user.username" placeholder="scooby.doo@test.com" />
+        <div class="logins">
+          <UIButton
+            class="btn"
+            color="black"
+            @click="
+              auth.signInWithOAuth({
+                provider: 'github',
+                options: { redirectTo },
+              })
+            "
+          >
+            <Icon name="ph:github-logo" />
+            GitHub
+          </UIButton>
+          <UIButton
+            color="info"
+            class="btn"
+            @click="
+              auth.signInWithOAuth({
+                provider: 'facebook',
+                options: { redirectTo },
+              })
+            "
+          >
+            <Icon name="ph:facebook-logo" />
+            Facebook
+          </UIButton>
+        </div>
+        <div class="inputs">
+          <UIInput
+            label="Usuário"
+            v-model="data.email"
+            placeholder="scooby.doo@test.com"
+          />
           <UIInput
             label="Senha"
             placeholder="*********"
             type="password"
-            v-model="user.password"
+            v-model="data.password"
           />
         </div>
-        <UIButton color="primary">Fazer Login</UIButton>
+        <UIButton color="primary" @click="loginwithEmail()"
+          >Fazer Login</UIButton
+        >
       </form>
     </div>
   </main>
 </template>
 
 <script setup>
-const user = ref({
-  username: "",
+const data = ref({
+  email: "",
   password: "",
 });
+
+const loginwithEmail = async () => {
+  const { user, session, error } = await auth.signInWithPassword({
+    email: data.email,
+    password: data.password,
+    options: {
+      emailRedirectTo: redirectTo,
+    },
+  });
+  useRouter().push("/");
+};
 
 useHead({
   title: "Login - Admin",
 });
+
+const user = useSupabaseUser();
+const { auth } = useSupabaseClient();
+
+const redirectTo = `http://localhost:3000/confirm`;
 </script>
 
 <style scoped>
@@ -73,4 +122,29 @@ main {
   align-items: flex-start;
 }
 
+.inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}
+svg {
+  font-size: 20px;
+  color: white;
+}
+
+.logins {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 </style>
