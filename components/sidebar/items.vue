@@ -11,12 +11,22 @@
     <icon class="item_icon" :name="option.icon" />
     <span>{{ option.name }}</span>
   </a>
+  <div class="item" @click="signout">
+    <icon class="item_icon" name="ph:sign-out" />
+    <span>Sair</span>
+  </div>
 </template>
 
 <script setup>
 const props = defineProps({
   options: { type: Object, default: {}, required: true },
 });
+const { auth } = useSupabaseClient();
+
+const signout = async () => {
+  await auth.signOut({ redirectTo: '/login' });
+  navigateTo('/login');
+};
 </script>
 
 <style scoped>
@@ -54,7 +64,7 @@ const props = defineProps({
 }
 
 .item_active {
-  background: var(--color)!important;
+  background: var(--color) !important;
 }
 
 .item_active span {

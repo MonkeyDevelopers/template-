@@ -3,11 +3,11 @@
     <div class="container">
       <!-- <img src="/logo.png" alt="" /> -->
       <h2>Bem-vindo de volta!</h2>
-      <form class="form">
+      <form class="form" @submit="login($event)">
         <div class="logins">
           <UIButton
             class="btn"
-            color="black"
+            color="#FFFFFF"
             @click="
               auth.signInWithOAuth({
                 provider: 'github',
@@ -15,34 +15,32 @@
               })
             "
           >
-            <Icon name="ph:github-logo" />
-            GitHub
+            <Icon class="google" name="logos:github-icon" />
           </UIButton>
           <UIButton
-            color="info"
+            color="#FFFFFF"
             class="btn"
             @click="
               auth.signInWithOAuth({
-                provider: 'facebook',
+                provider: 'google',
                 options: { redirectTo },
               })
             "
           >
-            <Icon name="ph:facebook-logo" />
-            Facebook
+            <Icon class="google" name="logos:google-icon" />
           </UIButton>
         </div>
         <div class="inputs">
           <UIInput
             label="Usuário"
-            v-model="data.email"
+            v-model="info.email"
             placeholder="scooby.doo@test.com"
           />
           <UIInput
             label="Senha"
             placeholder="*********"
             type="password"
-            v-model="data.password"
+            v-model="info.password"
           />
         </div>
         <UIButton color="primary" @click="loginwithEmail()"
@@ -54,28 +52,30 @@
 </template>
 
 <script setup>
-const data = ref({
+const info = ref({
   email: "",
   password: "",
 });
 
-const loginwithEmail = async () => {
-  const { user, session, error } = await auth.signInWithPassword({
-    email: data.email,
-    password: data.password,
-    options: {
-      emailRedirectTo: redirectTo,
-    },
+const user = useSupabaseUser();
+const { auth } = useSupabaseClient();
+
+const login = async ($event) => {
+  event.preventDefault();
+  const {data, error} = await auth.signInWithPassword({
+    email: info.value.email,
+    password: info.value.password,
   });
-  useRouter().push("/");
+  if(data.user){
+    return navigateTo("/confirm");
+  }
 };
 
 useHead({
   title: "Login - Admin",
 });
 
-const user = useSupabaseUser();
-const { auth } = useSupabaseClient();
+
 
 const redirectTo = `http://localhost:3000/confirm`;
 </script>
@@ -129,8 +129,12 @@ main {
   gap: 20px;
 }
 svg {
-  font-size: 20px;
+  font-size: 40px;
   color: white;
+}
+
+.google {
+
 }
 
 .logins {

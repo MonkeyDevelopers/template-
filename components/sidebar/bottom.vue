@@ -8,7 +8,7 @@
       '--color': $colors.primary,
     }"
   >
-    <icon class="item_icon" :name="option.icon" />
+    <icon class="item_icon" :name="option?.icon" />
     <span>{{ option.name }}</span>
   </a>
   <div class="item" @click="mobileMenuStore.changeMobileMenu(true)">
