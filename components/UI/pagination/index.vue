@@ -4,8 +4,12 @@
          <icon name="ph:caret-left-bold" class="previous_icon" />
          Anterior
       </div>
+      
+      <div v-if="hasPreviousPages" class="undefined">
+         <icon name="ph:dots-three-bold" class="undefined_icon" />
+      </div>
 
-      <div v-for="page in visiblePages" :key="page" :class="(currentIndex + 1) == page ? 'selected_number' : ''" class="number" @click="goToPage(page)">
+      <div v-for="page in visiblePages" :key="page" :class="(currentPage) == page ? 'selected_number' : ''" class="number" @click="goToPage(page)">
          {{ page }}
       </div>
 
@@ -25,9 +29,14 @@
 const totalPages = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
 const visibleCount = 5;
 const currentIndex = ref(0);
+const currentPage = ref(1);
 
 const visiblePages = computed(() => {
    return totalPages.value.slice(currentIndex.value, currentIndex.value + visibleCount);
+});
+
+const hasPreviousPages = computed(() => {
+   return currentIndex.value > 0;
 });
 
 const hasMorePages = computed(() => {
@@ -35,21 +44,35 @@ const hasMorePages = computed(() => {
 });
 
 const prevPage = () => {
-   if (currentIndex.value > 0) {
-      currentIndex.value--;
+   if (currentPage.value > 1) {
+      currentPage.value--;
+      goToPage(currentPage.value); // Atualiza a página atual e centraliza, se necessário
    }
 };
 
 const nextPage = () => {
-   if (currentIndex.value + visibleCount < totalPages.value.length) {
-      currentIndex.value++;
+   if (currentPage.value < totalPages.value.length) {
+      currentPage.value++;
+      goToPage(currentPage.value); // Atualiza a página atual e centraliza, se necessário
    }
 };
 
 const goToPage = (page) => {
    const pageIndex = totalPages.value.indexOf(page);
-   if (pageIndex >= 0 && pageIndex + visibleCount <= totalPages.value.length) {
-      currentIndex.value = pageIndex;
+   currentPage.value = page;
+
+   // Lógica de centralização
+   const halfVisible = Math.floor(visibleCount / 2);
+   
+   if (pageIndex >= halfVisible && pageIndex + halfVisible < totalPages.value.length) {
+      // Centraliza a página selecionada, desde que haja páginas antes e depois
+      currentIndex.value = pageIndex - halfVisible;
+   } else if (pageIndex < halfVisible) {
+      // Se está perto do começo, mostra as primeiras páginas
+      currentIndex.value = 0;
+   } else if (pageIndex + halfVisible >= totalPages.value.length) {
+      // Se está perto do final, mostra as últimas páginas
+      currentIndex.value = totalPages.value.length - visibleCount;
    }
 };
 
@@ -62,6 +85,7 @@ const goToPage = (page) => {
       justify-content: center;
       align-items: center;
       gap: 2px;
+      user-select: none;
    }
    
    .previous {
@@ -104,8 +128,8 @@ const goToPage = (page) => {
    }
    
    .selected_number {
-      background: white !important;
-      color: #1c1c1c;
+      background: #c51b1b !important;
+      color: white;
       font-weight: bold;
       transition: none !important;
    }
