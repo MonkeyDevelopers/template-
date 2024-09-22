@@ -1,6 +1,6 @@
 <template>
    <nuxt-layout name="admin" title="Select" description="Selects?">
-      <div>
+      <div class="select">
          <UISelect v-model="selectedOption" :options="options" />
          <br><br><br><br><br>
          <p>Opção selecionada: {{ selectedOption }}</p>
@@ -27,4 +27,11 @@
 
 </script>
 
-<style scoped></style>
+<style scoped>
+
+   .select {
+      width: 300px;
+      position: relative;
+   }
+
+</style>

@@ -17,12 +17,14 @@
         </div>
       </template>
       <template #birth_date="{ item }">
-        <div class="row_item">
+        <div class="row_item item_full">
           <span>{{ item.birth_date }}</span>
         </div>
       </template>
       <template #action="{ item }">
-         <icon name="ph:gear-fine" class="header_menu_icon" />
+        <div class="row_item">
+          <icon name="ph:gear-fine" class="header_menu_icon" />
+        </div>
       </template>
     </UITable>
   </nuxt-layout>
@@ -52,6 +54,7 @@ const headers = [
   {
     key: "birth_date",
     label: "Birth Date",
+    size: "full",
   },
   {
     key: "action",

@@ -24,9 +24,7 @@
             <UICheckbox />
           </div>
           <slot :name="header.key" :item v-for="header in headers">
-            <div class="row_item">
-              {{ item[header.key] }}
-            </div>
+            {{ item[header.key] }}
           </slot>
         </div>
       </div>
