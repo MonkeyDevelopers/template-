@@ -19,9 +19,9 @@
         </div>
       </div>
       <div class="table_body">
-        <div class="table_row" v-for="item in items">
+        <div class="table_row" :class="item.selected ? 'row_selected' : ''" v-for="item in items">
           <div class="row_item item_thin">
-            <UICheckbox />
+            <UICheckbox v-model="item.selected" />
           </div>
           <slot :name="header.key" :item v-for="header in headers">
             {{ item[header.key] }}
@@ -36,12 +36,20 @@
 </template>
 
 <script setup>
+
 const props = defineProps({
   headers: { type: Array, default: [], required: true },
   items: { type: Array, default: [], required: true },
 });
 
 const selectall = ref(false);
+const localItems = reactive([...props.items]); // Cria uma cópia reativa dos items
+
+watch(selectall, (newValue) => {
+  localItems.forEach(item => {
+    item.selected = newValue; // Define status para true ou false com base no selectall
+  });
+});
 </script>
 
 <style scoped>
@@ -77,7 +85,7 @@ const selectall = ref(false);
   align-items: center;
   border: 1px solid #27262b;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 5px;
 }
 
 .table_head {
@@ -143,6 +151,10 @@ const selectall = ref(false);
 
 .table_row:hover {
   background: #212121;
+}
+
+.row_selected {
+  background: #161616;
 }
 
 .row_item {

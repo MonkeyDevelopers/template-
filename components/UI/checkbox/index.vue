@@ -30,5 +30,6 @@
       transition: .1s;
       margin: 0;
       color: #ebebeb;
+      user-select: none;
    }
 </style>
