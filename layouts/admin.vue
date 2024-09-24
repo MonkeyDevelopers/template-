@@ -65,6 +65,13 @@ const options = [
     active: "date_picker",
   },
   {
+    link: "/input_tag",
+    icon: "ph:bookmark",
+    name: "Input Tag",
+    active: "input_tag",
+    // mini: true,
+  },
+  {
     link: "/cargas",
     icon: "ph:clipboard-text",
     name: "Cargas",

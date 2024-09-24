@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
+    "@vueuse/integrations": "^11.1.0",
     "chart.js": "^4.4.0",
     "chartjs-plugin-datalabels": "^2.2.0",
     "date-fns": "^3.6.0",
@@ -31,6 +32,7 @@
     "maska": "^2.1.10",
     "pinia": "^2.1.7",
     "pusher-js": "^8.4.0-rc2",
+    "sortablejs": "^1.15.3",
     "v-money3": "^3.24.0",
     "vue-chartjs": "^5.2.0",
     "vue-the-mask": "^0.11.1",
