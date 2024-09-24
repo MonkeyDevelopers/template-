@@ -133,10 +133,6 @@ svg {
   color: white;
 }
 
-.google {
-
-}
-
 .logins {
   display: flex;
   gap: 10px;

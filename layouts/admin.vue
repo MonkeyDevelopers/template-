@@ -78,6 +78,13 @@ const options = [
     active: "cargas",
     // mini: true,
   },
+  {
+    link: "/tasks",
+    icon: "ph:notebook-duotone",
+    name: "Tasks",
+    active: "tasks",
+    // mini: true,
+  },
 ];
 
 const actionOptions = [

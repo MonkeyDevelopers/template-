@@ -1,38 +1,43 @@
 <template>
   <nuxt-layout name="admin" title="Tarefas" description="Tarefas">
-    {{ tasksFromServer }}
-    {{ tasks }}
-
-    {{ user.id }}
-    <KoButton color="primary" @click="fetchTasksFromServerRoute"
-      >Fetch Tasks From Server</KoButton
-    >
-    <KoButton color="secondary" @click="fetchTasks">Fetch Tasks</KoButton>
+    <UIForm>
+      <UIInput
+        label="Task Name"
+        v-model="task"
+        placeholder="Input your Task"
+      ></UIInput>
+      <KoButton color="primary" @click="save"> Save </KoButton>
+    </UIForm>
+    <UITable :headers :items="tasks"></UITable>
   </nuxt-layout>
 </template>
 
 <script setup>
-const T = useSupabaseClient();
-const user = useSupabaseUser();
-const tasksFromServer = ref();
+const headers = [
+  {
+    key: "id",
+    label: "",
+  },
+  {
+    key: "title",
+    label: "Task",
+  },
+];
 const tasks = ref();
+const task = ref("");
 
-const fetchTasks = async () => {
-  const { data } = await client
-    .from("tasks")
-    .select("id, title")
-    .eq("uuid", user.id)
-    .order("created_at");
-
-  return data;
+const save = async () => {
+  tasks.value.push({ id: tasks.value.length + 1, title: task.value });
+  // await $fetch("/api/tasks", {
+  //   method: "POST",
+  //   body: JSON.stringify({ task: task.value }),
+  // });
+  // fetchTasksFromServerRoute();
 };
 
 const fetchTasksFromServerRoute = async () => {
-  const data = await $fetch("/api/tasks", {
-    headers: useRequestHeaders(["cookie"]),
-    key: "tasks-from-server",
-  });
-  tasksFromServer.value = data;
+  const data = await $fetch("/api/tasks");
+  tasks.value = data;
 };
 
 onMounted(() => {
