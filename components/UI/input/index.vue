@@ -39,7 +39,7 @@
 
 <script setup>
 import { toRef, defineEmits } from "vue";
-import { useField, useForm } from "vee-validate";
+import { useField } from "vee-validate";
 
 const props = defineProps({
   type: {
@@ -123,7 +123,7 @@ input {
 }
 
 input:focus {
-  border: 1px solid #464646;
+  border: 1px solid #747474;
 }
 
 .input {
