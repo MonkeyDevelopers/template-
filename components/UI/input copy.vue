@@ -1,95 +1,56 @@
-<script setup lang="ts">
-import { toRef } from 'vue';
-import { useField } from 'vee-validate';
+<template>
+  <p class="label" v-if="label">{{ label }}</p>
+  <p class="label" v-if="!label"><slot></slot></p>
 
-const props = defineProps({
-  type: {
-    type: String,
-    default: 'text',
-  },
-  value: {
-    type: String,
-    default: undefined,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
+  <input :type :placeholder v-model="value" />
+</template>
+
+<script setup>
+defineProps({
   label: {
     type: String,
-    required: true,
+    default: "",
+    required: false,
   },
-  successMessage: {
+  type: {
     type: String,
-    default: '',
+    default: "text",
+    required: false,
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
+    required: false,
   },
 });
 
-// use `toRef` to create reactive references to `name` prop which is passed to `useField`
-// this is important because vee-validte needs to know if the field name changes
-// https://vee-validate.logaretm.com/v4/guide/composition-api/caveats
-const name = toRef(props, 'name');
-
-// we don't provide any rules here because we are using form-level validation
-// https://vee-validate.logaretm.com/v4/guide/validation#form-level-validation
-const {
-  value: inputValue,
-  errorMessage,
-  handleBlur,
-  handleChange,
-  meta,
-} = useField(name, undefined, {
-  initialValue: props.value,
-});
+const value = defineModel({ required: false, default: "" });
 </script>
 
-<template>
-  <div
-    class="TextInput"
-    :class="{ 'has-error': !!errorMessage, success: meta.valid }"
-  >
-    <label :for="name">{{ label }}</label>
-    <input
-      :name="name"
-      :id="name"
-      :type="type"
-      :value="inputValue"
-      :placeholder="placeholder"
-      @input="handleChange"
-      @blur="handleBlur"
-    />
-
-    <p class="help-message" v-show="errorMessage || meta.valid">
-      {{ errorMessage || successMessage }}
-    </p>
-  </div>
-</template>
-
 <style scoped>
-
-label {
-  display: block;
-  margin-bottom: 4px;
-  width: 100%;
+.label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #5d5d5d;
+  margin-bottom: -8px;
 }
 
 input {
-  border-radius: 5px;
-  border: 2px solid transparent;
-  padding: 15px 10px;
-  outline: none;
-  background-color: #f2f5f7;
   width: 100%;
-  transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out,
-    background-color 0.3s ease-in-out;
+  padding: 9px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid #171717;
+  transition: 0.3s;
+  background: none;
+  color: #cecece;
 }
 
 input:focus {
-  border-color: var(--primary-color);
+  border: 1px solid #464646;
 }
 
+input::placeholder {
+  color: #5d5d5d;
+}
 </style>
