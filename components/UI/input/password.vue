@@ -2,20 +2,20 @@
   <UIInput
     :name
     :label
-    :placeholder="view ? '*********' : placeholder"
+    :placeholder="view ? '*********' : props.placeholder"
     :successMessage
-    :type="view? 'text' : 'password'"
+    :type="view ? 'text' : 'password'"
     v-model="password"
   >
     <template #prepend v-if="position === 'left'">
       <div class="lock_icon">
-        <Icon @click="view = !view" name="ph:eye" v-if="view"  />
+        <Icon @click="view = !view" name="ph:eye" v-if="view" />
         <Icon @click="view = !view" name="ph:eye-slash" v-else />
       </div>
     </template>
     <template #append v-if="position === 'right'">
       <div class="lock_icon">
-        <Icon @click="view = !view" name="ph:eye" v-if="view"  />
+        <Icon @click="view = !view" name="ph:eye" v-if="view" />
         <Icon @click="view = !view" name="ph:eye-slash" v-else />
       </div>
     </template>

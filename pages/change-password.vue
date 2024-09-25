@@ -6,7 +6,7 @@
         label="Senha Atual"
         placeholder="Include your password"
         v-model="password"
-        position="right"
+        position="left"
       />
       <br />
       <UIInputPassword
@@ -14,12 +14,14 @@
         label="Senha"
         placeholder="Include your password"
         v-model="password"
+        position="left"
       />
       <UIInputPassword
         name="repeatPassword"
         label="Novo Password"
         placeholder="Include your password"
         v-model="changePassword"
+        position="left"
       />
       <KoButton color="secondary" type="submit"> Save </KoButton>
     </UIForm>
