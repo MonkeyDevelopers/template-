@@ -1,7 +1,7 @@
 <template>
   <div
     class="TextInput"
-    :class="{ 'has-error': !!errorMessage, success: meta.valid }"
+    :class="{ 'has-error': !!errorMessage, success: meta.valid && !!modelValue }"
     :style="{
       '--success-color': useColor().setColor('success'),
       '--error-color': useColor().setColor('danger'),
@@ -39,7 +39,7 @@
 
 <script setup>
 import { toRef, defineEmits } from "vue";
-import { useField } from "vee-validate";
+import { useField, useForm } from "vee-validate";
 
 const props = defineProps({
   type: {
@@ -56,11 +56,11 @@ const props = defineProps({
   },
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   label: {
     type: String,
-    required: true,
+    required: false,
   },
   successMessage: {
     type: String,
@@ -106,6 +106,7 @@ label {
   display: block;
   margin-bottom: 4px;
   width: 100%;
+  color: #cecece
 }
 
 input {
