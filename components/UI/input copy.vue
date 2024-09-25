@@ -70,11 +70,6 @@ const {
 </template>
 
 <style scoped>
-.TextInput {
-  position: relative;
-  margin-bottom: calc(1em * 1.5);
-  width: 100%;
-}
 
 label {
   display: block;
@@ -97,37 +92,4 @@ input:focus {
   border-color: var(--primary-color);
 }
 
-.help-message {
-  position: absolute;
-  bottom: calc(-1.5 * 1em);
-  left: 0;
-  margin: 0;
-  font-size: 14px;
-}
-
-.TextInput.has-error input {
-  background-color: var(--error-bg-color);
-  color: var(--error-color);
-}
-
-.TextInput.has-error input:focus {
-  border-color: var(--error-color);
-}
-
-.TextInput.has-error .help-message {
-  color: var(--error-color);
-}
-
-.TextInput.success input {
-  background-color: var(--success-bg-color);
-  color: var(--success-color);
-}
-
-.TextInput.success input:focus {
-  border-color: var(--success-color);
-}
-
-.TextInput.success .help-message {
-  color: var(--success-color);
-}
 </style>
