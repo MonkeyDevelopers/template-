@@ -10,11 +10,17 @@
           class="table_item"
           :class="'item_' + header.size"
         >
-          <span> {{ header.label }}</span>
+          <slot :name="'header-' + header.key">
+            <span> {{ header.label }}</span>
+          </slot>
         </div>
       </div>
       <div class="table_body">
-        <div class="table_row" :class="item.selected ? 'row_selected' : ''" v-for="item in items">
+        <div
+          class="table_row"
+          :class="item.selected ? 'row_selected' : ''"
+          v-for="item in items"
+        >
           <div v-if="hasToggle" class="row_item item_thin">
             <UICheckbox @click="toggleItem(item)" v-model="item.selected" />
           </div>
@@ -30,13 +36,12 @@
 </template>
 
 <script setup>
-
 const selectedItems = defineModel({ default: [], required: false });
 
 const props = defineProps({
   headers: { type: Array, default: [], required: true },
   items: { type: Array, default: [], required: true },
-  hasToggle: { type: Boolean, default: false, required: false }
+  hasToggle: { type: Boolean, default: false, required: false },
 });
 
 const selectall = ref(false);
@@ -53,51 +58,45 @@ const localItems = reactive([...props.items]);
 //     selectall.value = false;
 //     return;
 //   }
-  
+
 //   if(selectedItems.value.length == localItems.length) {
 //     selectall.value = true;
 //   }
-  
+
 // });
 
 function toggleItem(item) {
-  
   const itemIndex = selectedItems.value.indexOf(item);
-  
-  if(itemIndex != -1) {
+
+  if (itemIndex != -1) {
     selectedItems.value.splice(itemIndex, 1);
     item.selected = false;
-    if(selectedItems.value.length == 0) {
+    if (selectedItems.value.length == 0) {
       selectall.value = false;
     }
     selectall.value = false;
   } else {
     selectedItems.value.push(item);
     item.selected = true;
-    if(selectedItems.value.length == localItems.length) {
+    if (selectedItems.value.length == localItems.length) {
       selectall.value = true;
     }
   }
-    
 }
 
 function toggleAllItems() {
-  
-  if(selectall.value) {
-    localItems.forEach(item => {
-      selectedItems.value.push(item)
+  if (selectall.value) {
+    localItems.forEach((item) => {
+      selectedItems.value.push(item);
       item.selected = true;
     });
   } else {
     selectedItems.value = [];
-    localItems.forEach(item => {
+    localItems.forEach((item) => {
       item.selected = false;
     });
   }
-
 }
-
-
 </script>
 
 <style scoped>
