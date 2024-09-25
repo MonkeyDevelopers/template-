@@ -52,10 +52,10 @@ const options = [
     mini: true,
   },
   {
-    link: "/table",
+    link: "/data_table",
     icon: "ph:house",
     name: "Tabela",
-    active: "table",
+    active: "data_table",
     mini: true,
   },
   {
