@@ -11,8 +11,8 @@
 
     <Transition name="fade">
       <div
-        class="modal"
-        :class="(setDirection(), setModalMode())"
+        class="koro_modal"
+        :class="setDirection(), setModalMode()"
         v-if="action"
         ref="modal_ref"
       >
@@ -23,8 +23,7 @@
           v-for="option in options"
           @click="option.action"
         >
-          <icon v-if="option.icon" :name="option.icon" class="modal_icon" />
-          <span>{{ option.name }}</span>
+          <slot name="option" :option></slot>
         </div>
       </div>
     </Transition>
@@ -33,6 +32,8 @@
 
 <script setup>
 import { defineProps, ref } from "vue";
+import { onClickOutside } from "@vueuse/core";
+
 const action = ref(false);
 
 function setDirection() {
@@ -53,15 +54,17 @@ function openModal() {
     action.value = true;
   }
 }
-const color = props.color || $colors.primary;
 
 const props = defineProps({
   title: { type: String, default: "", required: false },
   options: { type: Array, default: [], required: false },
   direction: { type: String, default: "bottom-left", required: false },
   compact: { type: Boolean, default: false, required: false },
-  color: { type: string, default: "", required: false },
+  color: { type: String, default: "", required: false },
 });
+
+const color =
+  props.color || useColor().setColor("primary");
 
 const modal_ref = ref(null);
 onClickOutside(modal_ref, (event) => {
@@ -72,13 +75,13 @@ onClickOutside(modal_ref, (event) => {
 </script>
 
 <style scoped>
-/* modal */
+/* koro_modal */
 
 .modal_relative {
   position: relative;
 }
 
-.modal {
+.koro_modal {
   background: #0e0e0e;
   border: 2px solid #171717;
   border-radius: 6px;
@@ -89,12 +92,12 @@ onClickOutside(modal_ref, (event) => {
   user-select: none;
 }
 
-.modal h2 {
+.koro_modal h2 {
   color: #dcdcdc;
   font-weight: 400;
 }
 
-.modal hr {
+.koro_modal hr {
   width: 100%;
   background: #171717;
 }
@@ -131,7 +134,7 @@ onClickOutside(modal_ref, (event) => {
   color: var(--color);
 }
 
-/* modal default */
+/* koro_modal default */
 
 .modal_default {
   width: 230px;
@@ -162,7 +165,7 @@ onClickOutside(modal_ref, (event) => {
   font-size: 20px !important;
 }
 
-/* modal compact */
+/* koro_modal compact */
 
 .modal_compact {
   width: 160px;
@@ -196,7 +199,7 @@ onClickOutside(modal_ref, (event) => {
   font-size: 17px !important;
 }
 
-/* modal positions */
+/* koro_modal positions */
 
 .top-right {
   position: absolute;
@@ -217,9 +220,9 @@ onClickOutside(modal_ref, (event) => {
 }
 
 .bottom-left {
-  position: absolute;
-  top: 110%;
-  right: 0;
+  position: absolute !important;
+  top: 110% !important;
+  right: 0 !important;
 }
 
 /* transition */

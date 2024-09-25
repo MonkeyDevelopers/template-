@@ -23,7 +23,7 @@
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
       </div>
-      <KoDropdownMenu :options="actionOptions" compact>
+      <KoDropdownMenu :options="actionOptions" compact >
         <template #default>
           <icon name="ph:gear-fine" class="header_menu_icon" />
         </template>
