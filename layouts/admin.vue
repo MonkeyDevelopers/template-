@@ -85,6 +85,13 @@ const options = [
     active: "tasks",
     // mini: true,
   },
+  {
+    link: "/change-password",
+    icon: "ph:lock",
+    name: "Change Password",
+    active: "change-password",
+    // mini: true,
+  },
 ];
 
 const actionOptions = [
