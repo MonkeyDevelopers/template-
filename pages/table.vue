@@ -1,36 +1,41 @@
 <template>
   <nuxt-layout name="admin" title="Table" description="Table?">
-    <UITable :headers :items>
+    <UIDataTable :hasToggle="true" :headers :items v-model="teste">
       <template #status="{ item }">
-        <div class="row_item item_light" >
+        <UIDataTableRowItem size="light">
           <span>{{ item.status ? "Ativo" : "Inativo" }}</span>
-        </div>
+        </UIDataTableRowItem>
       </template>
       <template #name="{ item }">
-        <div class="row_item item_normal">
+        <UIDataTableRowItem>
           <span>{{ item.name }}</span>
-        </div>
+        </UIDataTableRowItem>
       </template>
       <template #email="{ item }">
-        <div class="row_item item_full">
+        <UIDataTableRowItem size="full">
           <span>{{ item.email }}</span>
-        </div>
+        </UIDataTableRowItem>
       </template>
       <template #birth_date="{ item }">
-        <div class="row_item item_full">
+        <UIDataTableRowItem size="full">
           <span>{{ item.birth_date }}</span>
-        </div>
+        </UIDataTableRowItem>
       </template>
       <template #action="{ item }">
-        <div class="row_item">
-          <icon name="ph:gear-fine" class="header_menu_icon" />
-        </div>
+        <UIDataTableRowItem>
+          <icon name="ph:gear-fine" class="action_icon_test" />
+        </UIDataTableRowItem>
       </template>
-    </UITable>
+    </UIDataTable>
+    <br>
+    <UIPagination />
   </nuxt-layout>
 </template>
 
 <script setup>
+
+const teste = ref([])
+
 useHead({
   title: "Table - Admin",
 });
@@ -97,34 +102,9 @@ const items = ref([
 </script>
 
 <style scoped>
-.item_thin {
-  flex: 0 !important;
-  margin-right: 20px;
-}
 
-.item_light {
-  flex: 0.5 !important;
-}
+  .action_icon_test {
+    font-size: 16px;
+  }
 
-.item_normal {
-  flex: 1 !important;
-}
-
-.item_full {
-  flex: 1.5 !important;
-}
-
-.row_item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.row_item span {
-  font-size: 13px;
-  color: #ebebeb;
-  font-weight: 300;
-}
 </style>

@@ -8,7 +8,7 @@
       ></UIInput>
       <KoButton color="primary" @click="save"> Save </KoButton>
     </UIForm>
-    <UITable :headers :items="tasks"></UITable>
+    <UIDataTable :headers :items="tasks"></UIDataTable>
   </nuxt-layout>
 </template>
 

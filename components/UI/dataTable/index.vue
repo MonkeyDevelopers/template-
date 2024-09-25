@@ -1,14 +1,9 @@
 <template>
   <div class="table_container">
-    <div class="table_header">
-      <div class="table_input">
-        <UIInput :placeholder="'Buscar por Email'" />
-      </div>
-    </div>
     <div class="table">
       <div class="table_head">
-        <div class="table_item item_thin">
-          <UICheckbox v-model="selectall" />
+        <div v-if="hasToggle" class="table_item item_thin">
+          <UICheckbox @click="toggleAllItems()" v-model="selectall" />
         </div>
         <div
           v-for="header in headers"
@@ -20,36 +15,89 @@
       </div>
       <div class="table_body">
         <div class="table_row" :class="item.selected ? 'row_selected' : ''" v-for="item in items">
-          <div class="row_item item_thin">
-            <UICheckbox v-model="item.selected" />
+          <div v-if="hasToggle" class="row_item item_thin">
+            <UICheckbox @click="toggleItem(item)" v-model="item.selected" />
           </div>
           <slot :name="header.key" :item v-for="header in headers">
-            {{ item[header.key] }}
+            <UIDataTableRowItem>
+              {{ item[header.key] }}
+            </UIDataTableRowItem>
           </slot>
         </div>
       </div>
-    </div>
-    <div class="table_footer">
-      <UIPagination />
     </div>
   </div>
 </template>
 
 <script setup>
 
+const selectedItems = defineModel({ default: [], required: false });
+
 const props = defineProps({
   headers: { type: Array, default: [], required: true },
   items: { type: Array, default: [], required: true },
+  hasToggle: { type: Boolean, default: false, required: false }
 });
 
 const selectall = ref(false);
-const localItems = reactive([...props.items]); // Cria uma cópia reativa dos items
+const localItems = reactive([...props.items]);
 
-watch(selectall, (newValue) => {
-  localItems.forEach(item => {
-    item.selected = newValue; // Define status para true ou false com base no selectall
-  });
-});
+// watch(selectall, (newValue) => {
+//   localItems.forEach(item => {
+//     toggleItem(item)
+//   });
+// });
+
+// watch(selectedItems, (newValue) => {
+//   if(selectedItems.value.length == 0) {
+//     selectall.value = false;
+//     return;
+//   }
+  
+//   if(selectedItems.value.length == localItems.length) {
+//     selectall.value = true;
+//   }
+  
+// });
+
+function toggleItem(item) {
+  
+  const itemIndex = selectedItems.value.indexOf(item);
+  
+  if(itemIndex != -1) {
+    selectedItems.value.splice(itemIndex, 1);
+    item.selected = false;
+    if(selectedItems.value.length == 0) {
+      selectall.value = false;
+    }
+    selectall.value = false;
+  } else {
+    selectedItems.value.push(item);
+    item.selected = true;
+    if(selectedItems.value.length == localItems.length) {
+      selectall.value = true;
+    }
+  }
+    
+}
+
+function toggleAllItems() {
+  
+  if(selectall.value) {
+    localItems.forEach(item => {
+      selectedItems.value.push(item)
+      item.selected = true;
+    });
+  } else {
+    selectedItems.value = [];
+    localItems.forEach(item => {
+      item.selected = false;
+    });
+  }
+
+}
+
+
 </script>
 
 <style scoped>
@@ -58,7 +106,6 @@ watch(selectall, (newValue) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 200px;
   gap: 20px;
 }
 
