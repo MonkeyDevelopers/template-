@@ -17,7 +17,7 @@ const props = defineProps({
   color: { type: String },
 });
 
-const UseColor = useColor(props.color);
+const UseColor = useColor();
 const handleClick = () => {
   emit("click");
 };

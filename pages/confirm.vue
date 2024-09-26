@@ -2,7 +2,6 @@
   <div>
     <p>
       Redirecting...
-      {{user}}
     </p>
   </div>
 </template>

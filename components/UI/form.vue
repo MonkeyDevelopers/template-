@@ -1,9 +1,34 @@
 <template>
-  <div class="form container">
+  <Form
+    class="form container"
+    @submit="onSubmit"
+    :validation-schema="schema"
+    @invalid-submit="onInvalidSubmit"
+  >
     <slot></slot>
-  </div>
+  </Form>
 </template>
+<script setup>
+import { Form } from "vee-validate";
+import { defineEmits } from "vue";
 
+const emit = defineEmits(["onSubmit", "onInvalidSubmit"]);
+
+const onSubmit = () => {
+  emit("onSubmit");
+};
+
+const onInvalidSubmit = () => {
+  emit("onInvalidSubmit");
+};
+
+const props = defineProps({
+  schema: {
+    type: Object,
+    required: false,
+  },
+});
+</script>
 <style scoped>
 .container {
   display: flex;
