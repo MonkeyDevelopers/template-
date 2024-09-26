@@ -11,8 +11,6 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxt/icon": "^1.5.1",
-    "@nuxtjs/supabase": "^1.4.0",
     "@vueuse/core": "^10.6.1",
     "@vueuse/nuxt": "^10.6.1",
     "mapbox-gl": "^3.3.0",
@@ -22,13 +20,12 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@pinia/nuxt": "^0.5.1",
     "@vee-validate/nuxt": "^4.13.2",
     "@vueuse/integrations": "^11.1.0",
     "chart.js": "^4.4.0",
     "chartjs-plugin-datalabels": "^2.2.0",
     "date-fns": "^3.6.0",
-    "koro-ui": "^0.0.28",
+    "koro-ui": "^0.0.31",
     "laravel-echo": "^1.15.3",
     "maska": "^2.1.10",
     "pinia": "^2.1.7",

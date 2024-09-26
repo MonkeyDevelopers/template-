@@ -10,14 +10,13 @@ export default defineNuxtConfig({
   css: [`assets/css/style.css`],
 
   modules: [
-    '@pinia/nuxt',
-    '@vueuse/nuxt',
     'nuxt-mapbox',
     'koro-ui',
-    '@nuxtjs/supabase',
-    '@nuxt/icon',
-    '@vee-validate/nuxt'
   ],
+
+  koroUI: {
+    supabase: true,
+  },
 
   mapbox: {
     accessToken: 'pk.eyJ1IjoiYW5kbHViYXIiLCJhIjoiY2xmZDJvdjNqMGg2dTN5cGtzZGRoOTY3OSJ9.PToSonCxJ-dq8Ca4MZ1Cow'
