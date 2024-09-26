@@ -23,17 +23,24 @@
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
       </div>
-      <KoDropdownMenu :options="actionOptions" compact>
-        <template #default>
-          <icon name="ph:gear-fine" class="header_menu_icon" />
-        </template>
-        <template #option="{ option }" class="modal_item">
-          <icon :name="option.icon" class="modal_icon" />
-          <span>
-            {{ option.name }}
-          </span>
-        </template>
-      </KoDropdownMenu>
+      <div class="header_actions">
+        <KoDropdownMenu :options="actionOptions" compact>
+          <template #default>
+            <UIAvatar
+            color="primary"
+            size="40"
+            src="avatar.jpg"
+            radius="rounded"
+          ></UIAvatar>
+          </template>
+          <template #option="{ option }" class="modal_item">
+            <icon :name="option.icon" class="modal_icon" />
+            <span>
+              {{ option.name }}
+            </span>
+          </template>
+        </KoDropdownMenu>
+      </div>
     </header>
 
     <div class="layout_body">
@@ -149,6 +156,13 @@ const { mobileMenu } = storeToRefs(mobileMenuStore);
   font-size: 13px;
   font-weight: 300;
   color: #969696;
+}
+
+.header_actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .header_menu_icon {
