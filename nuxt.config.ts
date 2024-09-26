@@ -3,10 +3,6 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-04-03',
 
-  icon: {
-    mode: 'svg',
-  },
-
   css: [`assets/css/style.css`],
 
   modules: [
@@ -16,6 +12,7 @@ export default defineNuxtConfig({
 
   koroUI: {
     supabase: true,
+    veeValidate: true,
   },
 
   mapbox: {
@@ -24,10 +21,6 @@ export default defineNuxtConfig({
 
   imports: {
     dirs: ["./store"],
-  },
-
-  pinia: {
-    storesDirs: ["defineStore", "acceptHMRUpdate", "storeToRefs"],
   },
 
   runtimeConfig: {
