@@ -9,6 +9,10 @@ export default defineNuxtConfig({
     'nuxt-mapbox',
     'koro-ui',
   ],
+  
+  icon: {
+    mode: 'svg'
+  },
 
   koroUI: {
     supabase: true,
